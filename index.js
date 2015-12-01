@@ -36,19 +36,31 @@ NotFoundError = function(options) {
   const id = options.id;
 
   this.status = 404;
-  this.name = 'NotFoundError';
+  this.name = `NotFoundError`;
   this.title = `Resource not found`;
   this.detail = `A resource with type '${type}' and id '${id}' was not found.`;
+}
+
+RelationshipError = function(options) {
+  const type = options.type;
+  const method = options.method;
+
+  this.status = 400;
+  this.name = `RelationshipError`;
+  this.title = `Relationship error`;
+  this.detail = `You cannot ${method} a ${type} relationship.`;
 }
 
 util.inherits(AdapterError, RestleError);
 util.inherits(BadRequestError, RestleError);
 util.inherits(ConflictError, RestleError);
 util.inherits(NotFoundError, RestleError);
+util.inherits(RelationshipError, RestleError);
 
 module.exports = {
   AdapterError: AdapterError,
   BadRequestError: BadRequestError,
   ConflictError: ConflictError,
   NotFoundError: NotFoundError,
+  RelationshipError: RelationshipError,
 }
