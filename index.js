@@ -48,7 +48,7 @@ util.inherits(NotFoundError, RestleError);
 
 module.exports = {
   AdapterError: AdapterError,
-  BadRequestError: AdapterError,
+  BadRequestError: BadRequestError,
   ConflictError: ConflictError,
   NotFoundError: NotFoundError,
 }
