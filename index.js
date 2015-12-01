@@ -8,18 +8,17 @@ AdapterError = function(options) {
 
   this.status = 500;
   this.name = `AdapterError`;
-  this.title = `Adapter failed to connect`
+  this.title = `Adapter failed to connect`;
   this.detail = `The ${type} adapter failed to properly connect. Reason: ${reason}`;
 }
 
-NotFoundError = function(options) {
-  const type = options.type;
-  const id = options.id;
+BadRequestError = function(options) {
+  const detail = options.detail;
 
-  this.status = 404;
-  this.name = 'NotFoundError';
-  this.title = `Resource not found`,
-  this.detail = `A resource with type '${type}' and id '${id}' was not found.`;
+  this.status = 400;
+  this.name = 'BadRequestError';
+  this.title = 'Bad request';
+  this.detail = detail;
 }
 
 ConflictError = function(options) {
@@ -28,16 +27,28 @@ ConflictError = function(options) {
 
   this.status = 409;
   this.name = `ConflictError`;
-  this.title = `Conflicting values`,
+  this.title = `Conflicting values`;
   this.detail = `Tried to perform an operation on mismatched types: ${first} and ${second}`;
 }
 
+NotFoundError = function(options) {
+  const type = options.type;
+  const id = options.id;
+
+  this.status = 404;
+  this.name = 'NotFoundError';
+  this.title = `Resource not found`;
+  this.detail = `A resource with type '${type}' and id '${id}' was not found.`;
+}
+
 util.inherits(AdapterError, RestleError);
-util.inherits(NotFoundError, RestleError);
+util.inherits(BadRequestError, RestleError);
 util.inherits(ConflictError, RestleError);
+util.inherits(NotFoundError, RestleError);
 
 module.exports = {
   AdapterError: AdapterError,
-  NotFoundError: NotFoundError,
+  BadRequestError: AdapterError,
   ConflictError: ConflictError,
+  NotFoundError: NotFoundError,
 }
