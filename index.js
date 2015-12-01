@@ -44,11 +44,12 @@ NotFoundError = function(options) {
 RelationshipError = function(options) {
   const type = options.type;
   const method = options.method;
+  const target = options.target;
 
   this.status = 400;
   this.name = `RelationshipError`;
   this.title = `Relationship error`;
-  this.detail = `You cannot ${method} a ${type} relationship.`;
+  this.detail = `You cannot ${method} a ${type} relationship with a ${target}.`;
 }
 
 util.inherits(AdapterError, RestleError);
